@@ -25,6 +25,14 @@ import java.util.stream.Collectors;
 //Je moet de URL aangeven die een type entity hoort (/filialen hoort bij Filiaal entities). Je typt
 //@ExposesResourceFor(Filiaal.class) voor de class:
 @ExposesResourceFor(Filiaal.class)
+@CrossOrigin(exposedHeaders = "Location")
+//In hoofdstuk 16 van cursus Spring Advanced willen we dit project als backend applicatie gebruiker. Hiervoor hebben we
+//CrossOrigin nodig. Standaard kan de frontend applicatie de backend applicatie niet aanspreken, met Cross Origin Resource
+//Sharing kan dit wel.
+//Als je @CrossOrigin typt voor de class FiliaalController, kan JavaScript code van andere websites alle requests doen
+//die FiliaalController behandelt. Bij een CORS request bevat de response standaard slechts een beperkt aantal headers.
+//De Location header ontbreekt. Je hebt in het voorbeeld straks deze header nodig. Met exposedHeaders = "Location"
+//plaatst Spring deze header toch in de response.
 public class FiliaalController {
     private final FiliaalService filiaalService;
     private final TypedEntityLinks.ExtendedTypedEntityLinks<Filiaal> links;
